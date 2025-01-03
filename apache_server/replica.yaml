@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  # name of RS
+  name: apache-rs
+  labels:
+    # another label
+    app: apache
+    tier: frontend
+spec:
+  # template of pod to be created
+  template:
+    # pod metadata section
+    metadata:
+      name: s-app
+      labels:
+        tier: frontend
+    # container specification
+    spec:
+      containers:
+      - name: s-container
+        image: samir3112/c-apache:v1 
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+  # number of pods to be created
+  replicas: 3
+  # pick pods from label
+  selector: 
+    matchLabels:
+      tier: frontend
+
+
+
+# kubectl apply -f replica.yaml
+# kubectl get replicaset (or rs)
+# kubectl get pods
+# now try to create pod by p.yaml (ensure label is same)
+# since replica is 3, it will delete that pod immediately (rs also takes account of pods which are not created via rs but got matching labels)
+# kubectl delete -f replica.yaml
+# again
+# kubectl apply -f p.yaml
+# kubectl apply -f replica.yaml
+# total count will be 3
+# kubectl delete -f p.yaml
+# kubectl delete -f replica.yaml
