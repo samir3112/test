@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  # name of pod
+  name: s-app
+  # labels on pod
+  labels:
+    tier: frontend
+
+    app: apache
+    tier: frontend
+spec:
+  containers:
+    # name of container
+  - name: s-container
+    # image of container
+    image: samir3112/c-apache:v1 
+    imagePullPolicy: Always
+    ports:
+      - containerPort: 80
+
+
+
+# docker build -t samir3112/c-apache:v1  .
+# docker push samir3112/c-apache:v1 
+
+# kubectl apply -f p.yaml
+# kubectl get pods -w
+# wait for pod to be in running state
+# kubectl exec -it s-app -- /bin/bash
+# inside pod
+# curl http://localhost:80
+# kubectl port-forward pod/s-app 8080:80
+# kubectl get pod <pod_name> -o yaml
+# to edit pod
+# kubectl edit pod <pod_name>
+# if definition got saved at /tmp location after edit
+# kubectl replace --force -f </tmp/***.yaml>
+# kubectl delete -f pod.yaml
