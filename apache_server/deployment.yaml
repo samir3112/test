@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: apache-deployment
-  namespace: test_k
+  namespace: test-k
 spec:
   replicas: 2
   selector:
@@ -21,6 +21,11 @@ spec:
             - containerPort: 80
 
 
-# kubectl create namespace test_k
+# kubectl create namespace test-k
+# kubectl config set-context --current --namespace=test-k
 # kubectl apply -f deployment.yaml
 # kubectl get pods
+# kubectl scale deployment apache-deployment --replicas=4
+# kubectl get deployments
+# kubectl config view --minify | grep namespace
+# also used kubectl get namespaces
