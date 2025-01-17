@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: apache-daemonset
+  namespace: test-k
+spec:
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+    spec:
+      containers:
+      - name: s-container
+        image: samir3112/c-apache:v1
+        ports:
+        - containerPort: 80
+
+
+# kubectl apply -f daemonset.yaml
+# kubectl get pods -o wide -n test-k
+

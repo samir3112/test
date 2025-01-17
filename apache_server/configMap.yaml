@@ -1,0 +1,46 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apache-index
+  namespace: test-k
+data:
+  index.html: |
+    Hello DevOps Team, Welcome to Cloud Session
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-deployment
+  namespace: test-k
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+        tier: frontend
+    spec:
+      containers:
+        - name: s-container
+          image: samir3112/c-apache:v1
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: apache-index-volume
+              mountPath: /var/www/html/index.html  # Apache's default location for index.html
+              subPath: index.html
+      volumes:
+        - name: apache-index-volume
+          configMap:
+            name: apache-index
+
+# kubectl apply -f configMap.yaml
+# kubectl get configmap -n test-k
+# kubectl get deployment -n test-k
+# kubectl get pods -n test-k
+# after these only copy apache pod in kubectl get pods
+# kubectl exec -it apache-deployment -- /bin/bash
