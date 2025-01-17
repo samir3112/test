@@ -21,4 +21,6 @@ spec:
             - containerPort: 80
 
 
-
+# kubectl create namespace test_k
+# kubectl apply -f deployment.yaml
+# kubectl get pods
