@@ -30,10 +30,9 @@ spec:
 # kubectl exec -it s-app -- /bin/bash
 # inside pod
 # curl http://localhost:80
-# kubectl port-forward pod/s-app 8080:80
 # kubectl get pod <pod_name> -o yaml
 # to edit pod
 # kubectl edit pod <pod_name>
 # if definition got saved at /tmp location after edit
 # kubectl replace --force -f </tmp/***.yaml>
-# kubectl delete -f pod.yaml
+# kubectl delete -f p.yaml
